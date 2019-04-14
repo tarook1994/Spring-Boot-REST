@@ -1,22 +1,23 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.example.demo.interfaces.Coach;
 import com.example.demo.interfaces.FortuneService;
 
 public class BaseballCoach implements Coach {
 	
-	FortuneService fortuneService,sadFortuneService;
+	@Autowired
+	@Qualifier("happyFortuneService")
+	FortuneService fortuneService;
+	
+	@Autowired
+	@Qualifier("sadFortuneService")
+	FortuneService sadFortuneService;
 
 	
-	public BaseballCoach(FortuneService fortuneService) {
-		// TODO Auto-generated constructor stub
-		this.fortuneService = fortuneService;
-		
-	}
-	
-	public void setSadFortuneService(FortuneService sadFortuneService) {
-		this.sadFortuneService  = sadFortuneService;
-	}
+
 	@Override
 	public String getDailyWorkout() {
 		// TODO Auto-generated method stub

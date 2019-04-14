@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.time.LocalTime;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,11 +14,14 @@ public class RestApp {
 	
 	@GetMapping("/")
 	public String getStartPage() {
-		ClassPathXmlApplicationContext context = 
-				new ClassPathXmlApplicationContext("applicationContext.xml");
+		AnnotationConfigApplicationContext context = 
+				new AnnotationConfigApplicationContext(Config.class);
 		Coach myCoach = context.getBean("myCoach",Coach.class);
 		System.out.println(myCoach.getDailyWorkout() 
 			+ myCoach.getDailyFortune() + myCoach.getSadFortune());
+		
+		Coach footballCoach = context.getBean("footballCoach",Coach.class);
+		System.out.println(footballCoach.getDailyWorkout());
 		
 		return "Hello World!! Time now is : " + LocalTime.now() + myCoach.getDailyWorkout();
 	}
