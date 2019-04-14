@@ -17,7 +17,7 @@ public class RestApp {
 				new ClassPathXmlApplicationContext("applicationContext.xml");
 		Coach myCoach = context.getBean("myCoach",Coach.class);
 		System.out.println(myCoach.getDailyWorkout() 
-			+ myCoach.getDailyFortune());
+			+ myCoach.getDailyFortune() + myCoach.getSadFortune());
 		
 		return "Hello World!! Time now is : " + LocalTime.now() + myCoach.getDailyWorkout();
 	}

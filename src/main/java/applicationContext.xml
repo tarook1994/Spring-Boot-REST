@@ -10,9 +10,12 @@
 	<!-- add entry to enable component scanning -->
 	<bean id="myFortuneService"
 	class  = "com.example.demo.HappyFortuneService"></bean>
+	<bean id="sadFortuneService"
+	class  = "com.example.demo.SadFortuneService"></bean>
 	<bean id="myCoach"
 			class = "com.example.demo.BaseballCoach">
 			<constructor-arg ref="myFortuneService"/>
+			<property name="sadFortuneService" ref="sadFortuneService"></property>
 			</bean>
 	
 	<context:component-scan base-package="com.example.demo"/>
