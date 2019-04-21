@@ -3,6 +3,8 @@ package com.example.demo.hibernate;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="instructor")
@@ -37,6 +39,18 @@ public class Instructor {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="instructor_detail_id ")
     private InstructiorDetail instructorDetail;
+
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    @OneToMany(mappedBy = "instructor", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    List<Course> courses;
 
 
     public int getId() {
@@ -79,6 +93,14 @@ public class Instructor {
         this.instructorDetail = instructorDetail;
     }
 
+    //Bi-directional logic
+    public void add( Course tempCourse) {
+        if(courses== null ){
+            courses = new ArrayList<>();
+        }
+        courses.add(tempCourse);
+        tempCourse.setInstructor(this);
+    }
     @Override
     public String toString() {
         return "Instructor{" +
