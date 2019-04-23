@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.List;
 
 
-public class CreateInstructorCoursesDemo {
+public class EagerLazyDemo {
 
     public static void main(String [] args) {
         SessionFactory factory = new Configuration().configure()
@@ -30,9 +30,8 @@ public class CreateInstructorCoursesDemo {
             Instructor instructor = (Instructor) session.get(Instructor.class, 2);
 
 
-            List<Course> courses = instructor.getCourses();
 
-            System.out.println(courses);
+            System.out.println(instructor);
 
             session.getTransaction().commit();;
 

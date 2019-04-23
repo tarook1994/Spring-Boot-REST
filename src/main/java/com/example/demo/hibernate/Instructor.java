@@ -1,13 +1,12 @@
 package com.example.demo.hibernate;
 
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="instructor")
+@Table(name = "instructor")
 public class Instructor {
 
     public Instructor() {
@@ -22,22 +21,22 @@ public class Instructor {
     }
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name= "email")
+    @Column(name = "email")
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="instructor_detail_id ")
+    @JoinColumn(name = "instructor_detail_id ")
     private InstructiorDetail instructorDetail;
 
 
@@ -49,7 +48,8 @@ public class Instructor {
         this.courses = courses;
     }
 
-    @OneToMany(mappedBy = "instructor", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "instructor", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
+            fetch = FetchType.EAGER)
     List<Course> courses;
 
 
@@ -94,13 +94,14 @@ public class Instructor {
     }
 
     //Bi-directional logic
-    public void add( Course tempCourse) {
-        if(courses== null ){
+    public void add(Course tempCourse) {
+        if (courses == null) {
             courses = new ArrayList<>();
         }
         courses.add(tempCourse);
         tempCourse.setInstructor(this);
     }
+
     @Override
     public String toString() {
         return "Instructor{" +
