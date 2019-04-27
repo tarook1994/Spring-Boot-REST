@@ -31,12 +31,12 @@ public class RestApp {
 	
 	@GetMapping("/")
 	public String getStartPage(@RequestParam("test") String name) {
-		AnnotationConfigApplicationContext context = 
+		AnnotationConfigApplicationContext context =
 				new AnnotationConfigApplicationContext(Config.class);
 		Coach myCoach = context.getBean("myCoach",Coach.class);
-		System.out.println(myCoach.getDailyWorkout() 
-			+ myCoach.getDailyFortune() + myCoach.getSadFortune());
-		
+		System.out.println(myCoach.getDailyWorkout()
+				+ myCoach.getDailyFortune() + myCoach.getSadFortune());
+
 		Coach footballCoach = context.getBean("footballCoach",Coach.class);
 		System.out.println(footballCoach.getDailyWorkout());
 		
